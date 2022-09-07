@@ -13,9 +13,11 @@ public class StudentModel {
     License license;
 
     public StudentModel(Student student){
+        this.id = student.getId();
         this.name = student.getName();
         this.age = student.getAge();
         this.dni = student.getDni();
+        this.license = student.getLicense();
     }
 
 }

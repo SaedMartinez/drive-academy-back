@@ -55,7 +55,8 @@ public class StudentServiceImp implements IStudentServ {
 
     @Override
     public List<StudentModel> searchAllStudents() {
-        return studentConverter.listConverter(iStudentRepo.findAll());
+        var studentsList = studentConverter.listConverter(iStudentRepo.findAll());
+        return  studentsList;
     }
 
     @Override
