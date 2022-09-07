@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -50,7 +51,7 @@ public class StudentController {
 
 
     @PutMapping("/update/student")
-    public Long updateStudent(@Validated @RequestBody StudentDTO studentDTO){
+    public Long updateStudent(@Valid @RequestBody StudentDTO studentDTO){
         //TODO metohod validar input DTO
         return iStudentServ.updateStudent(studentDTO);
     }

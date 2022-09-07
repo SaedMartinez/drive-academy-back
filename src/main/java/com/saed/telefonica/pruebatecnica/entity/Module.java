@@ -16,6 +16,9 @@ public class Module {
     @Column(name = "MD_MODULE_NAME")
     private String moduleName;
 
+    @Column(name = "MD_MODULE_STATUS")
+    private String moduleStatus;
+
     @ManyToOne
     @JoinColumn(name = "MD_COURSE_FK")
     private Course course;
