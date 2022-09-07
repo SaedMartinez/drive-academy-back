@@ -9,12 +9,14 @@ import lombok.Data;
 public class ModuleModel {
     private Long id;
     private String moduleName;
+    private String moduleStatus;
     private Course course;
     private Student student;
 
     public ModuleModel(Module module){
         this.id = module.getId();
         this.moduleName = module.getModuleName();
+        this.moduleStatus = module.getModuleStatus();
         this.course = module.getCourse();
         this.student = module.getStudent();
     }
