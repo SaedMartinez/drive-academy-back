@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ILicenseRepo extends JpaRepository<License, Long> {
+    License findByTypeName(String typeName);
 }

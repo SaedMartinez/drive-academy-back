@@ -2,6 +2,7 @@ package com.saed.telefonica.pruebatecnica.service.impl;
 
 import com.saed.telefonica.pruebatecnica.converter.StudentConverter;
 import com.saed.telefonica.pruebatecnica.dto.StudentDTO;
+import com.saed.telefonica.pruebatecnica.entity.License;
 import com.saed.telefonica.pruebatecnica.entity.Student;
 import com.saed.telefonica.pruebatecnica.model.StudentModel;
 import com.saed.telefonica.pruebatecnica.repository.ICourseRepo;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,7 +63,17 @@ public class StudentServiceImp implements IStudentServ {
 
     @Override
     public Long createStudent(StudentDTO studentDTO) {
+        //TODO refactorizar con metodo busqueda por name
+        var licenseEntityList = new ArrayList<>();
+        iLicenseRepo.findAll().forEach( license -> {
+            if (license.getTypeName().toUpperCase().contains(studentDTO.getLicense().getTypeName().toUpperCase())) {
+                licenseEntityList.add(license);
+            }
+        });
         var preparedStudentEntity = fillEntityStudent(studentDTO, new Student());
+        var licenseEntity = (License) licenseEntityList.get(0);
+        iLicenseRepo.save(licenseEntity);
+        preparedStudentEntity.setLicense(licenseEntity);
         preparedStudentEntity = iStudentRepo.save(preparedStudentEntity);
         return preparedStudentEntity.getId();
     }
